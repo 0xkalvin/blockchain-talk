@@ -4,7 +4,7 @@ const cors = require('cors');
 const socketio = require('socket.io');
 
 const { createIdentity } = require('./blockchain-service');
-const propertyController = require('./property-controller.js.js');
+const propertyController = require('./property-controller');
 const offerController = require('./offer-controller');
 const setupSockets = require('./sockets');
 
