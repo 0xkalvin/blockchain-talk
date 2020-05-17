@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fabric-ca-client": "^1.4.8",
+    "fabric-network": "^1.4.8",
+    "socket.io": "^2.3.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
