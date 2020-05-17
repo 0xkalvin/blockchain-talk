@@ -6,6 +6,8 @@ const Offer = require('../models/Offer');
 
 const iteratorToArray = require('../utils/iterator-to-array');
 const buildKey = require('../utils/build-key');
+const buildSignature = require('../utils/build-signature');
+
 
 class RealStateContract extends Contract {
     async createProperty(ctx, payloadAsString) {
@@ -80,7 +82,12 @@ class RealStateContract extends Contract {
 
         const offer = JSON.parse(offerAsBuffer.toString());
 
+        const signaturePayload = Object.assign({}, offer, { now: Date.now() });
+        const signature = buildSignature(signaturePayload);
+
         offer.status = 'WAITING_BUYER_SIGNATURE';
+        offer.seller_signature = signature;
+
         await ctx.stub.putState(key, Buffer.from(JSON.stringify(offer)));
 
         return offer;
@@ -97,7 +104,12 @@ class RealStateContract extends Contract {
         }
 
         const offer = JSON.parse(offerAsBuffer.toString());
+
+        const signaturePayload = Object.assign({}, offer, { now: Date.now() });
+        const signature = buildSignature(signaturePayload);
+
         offer.status = 'WAITING_PAYMENT';
+        offer.buyer_signature = signature;
 
         await ctx.stub.putState(key, Buffer.from(JSON.stringify(offer)));
 
