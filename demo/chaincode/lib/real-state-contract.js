@@ -40,8 +40,8 @@ class RealStateContract extends Contract {
     async createOffer(ctx, payloadAsString) {
         const parsedPayload = JSON.parse(payloadAsString);
 
-        const { propertyId } = parsedPayload;
-        const propertyKey = buildKey('PROPERTY', propertyId);
+        const { property_id } = parsedPayload;
+        const propertyKey = buildKey('PROPERTY', property_id);
         const propertyAsBuffer = await ctx.stub.getState(propertyKey);
 
         if (!propertyAsBuffer || propertyAsBuffer.length <= 0) {
@@ -127,7 +127,7 @@ class RealStateContract extends Contract {
         const offer = JSON.parse(offerAsBuffer.toString());
         offer.status = 'FINALIZED';
 
-        const propertyKey = buildKey('PROPERTY', offer.propertyId);
+        const propertyKey = buildKey('PROPERTY', offer.property_id);
         const propertyAsBuffer = await ctx.stub.getState(propertyKey);
 
         if (!propertyAsBuffer || propertyAsBuffer.length <= 0) {

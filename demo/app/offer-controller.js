@@ -3,7 +3,6 @@ const blockchainService = require('./blockchain-service');
 const create = async (req, res) => {
     try {
         const payload = req.body;
-
         const contract = await blockchainService.getContract();
         const result = await contract.submitTransaction('createOffer', JSON.stringify(payload));
 
