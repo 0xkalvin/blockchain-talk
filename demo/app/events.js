@@ -10,7 +10,6 @@ const runListener = async () => {
         }
         const blockAsString = JSON.stringify(block, null, 2)
         console.log(blockAsString);
-        console.log(JSON.stringify(block.data.data), null, 2);
 
     });
 } 
